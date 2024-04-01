@@ -16,7 +16,7 @@
 	function getCategories()
 	{
 		$CI = &get_instance();
-		$query =$CI->db->get('cateory')->result();
+		$query =$CI->db->get('category')->result();
 		return $query;
 	}
 	function getCart()

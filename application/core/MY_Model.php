@@ -31,14 +31,14 @@ class MY_Model extends CI_Model
 		$this->form_validation->set_rules($validationRules);
 		return $this->form_validation->run();
 	}
-	public function select($column)
+	public function select($columns)
 	{
-		$this->db->select($column);
+		$this->db->select($columns);
 		return  $this;
 	}	
-	public function where($column)
+	public function where($column,$condition)
 	{
-		$this->db->where($column);
+		$this->db->where($column,$condition);
 		return $this;
 	}
 	public function like($column, $condition)
@@ -93,6 +93,7 @@ class MY_Model extends CI_Model
 			$this->perPage,
 			$this->calculateRealOffset($page)
 		);
+		return $this;
 	}
 	public function calculateRealOffset($page)
 	{
@@ -135,7 +136,7 @@ class MY_Model extends CI_Model
 			'num_tag_close' => '</li>',
 		];
 		$this->pagination->initialize($config);
-		return $this->pagination->create_link();
+		return $this->pagination->create_links();
 	}
 }
 
