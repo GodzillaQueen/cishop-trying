@@ -1,11 +1,11 @@
 <main class="container">
-	<?php $this->load->view('layouts/alert'); ?>
+	<?php $this->load->view('layouts/_alert'); ?>
 <div class="row">
 	<div class="col-md-10 mx-auto">
 		<div class="card">
 			<div class="card-header">
 			  <span>Kategori</span>
-			  <a href="/admin-category-form.html" class="btn btn-sm btn-secondary">Tambah</a>
+			  <a href="<?=base_url('category/create') ?>" class="btn btn-sm btn-secondary">Tambah</a>
 			  <div class="float-right">
 				<form action="#">
 					<div class="input-group">
@@ -34,13 +34,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($content as $row) :?>
+							<?php $no=0; foreach ($content as $row): $no++; ?>
 							<tr>
-								<td>1</td>
+								<td><?= $no?></td>
 								<td><?=$row->title ?></td>
 								<td><?= $row->slug ?></td>
 								<td>
-									<form action="#">
 										<a href="#">
 											<button class="btn btn-sm">
 												<i class="fas fa-edit text-info"></i>

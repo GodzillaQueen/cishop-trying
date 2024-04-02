@@ -16,13 +16,35 @@ public function __construct()
 		$data['title'] 	= 'Admin : Category';
 		$data['content'] = $this->category->paginate($page)->get();
 		$data['total_rows'] = $this->category->count();
-		$data['pagination'] = $this->category->makePagination
-		(base_url('category'),2,$data['total_rows']
+		$data['pagination'] = $this->category->makePagination(
+			base_url('category'),2,$data['total_rows']
 	);
 	$data['page'] = 'pages/category/index';
 	$this->view($data);
 	}
+	public function create()
+	{
+		if (!$_POST) {
+			$input = (object) $this->category->getDefaultValues();
+		} else {
+			$input = (object) $this->input->post(null,true);
+		}
+		if (!$this->category->validate()){
+			$data['title'] 			='Tambah Kategori';
+			$data['input'] 			=$input;
+			$data['form_action'] 	=base_url('category/create');
+			$data['page'] 			='pages/category/form';
 
+			$this->view($data);
+			return;
+		}
+		if ($this->category->create($input)) {
+			$this->session->set_flashdata('success','Data Berhasil Disimpan!');
+		} else {
+			$this->session->set_flashdata('error', 'Ups, Terjadi kesalahan');
+		}
+		redirect(base_url('category'));
+	}
 }
 
 /* End of file Category.php */

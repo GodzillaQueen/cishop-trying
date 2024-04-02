@@ -14,7 +14,7 @@ class MY_Model extends CI_Model
 		
 		if (!$this->table) {
 			$this->table = strtolower(
-				str_replace('model','',get_class($this))
+				str_replace('_model','',get_class($this))
 			);
 		}
 	}
@@ -53,7 +53,7 @@ class MY_Model extends CI_Model
 	}
 	public function join($table, $type='left')
 	{
-		$this->db->join($table,"$this->table.id_$table", $type);
+		$this->db->join($table,"$this->table.id_$table=$table.id", $type);
 		return $this;
 	}
 	public function orderBy($column, $order = 'asc')
@@ -109,31 +109,31 @@ class MY_Model extends CI_Model
 	{
 		$this->load->library('pagination');
 		$config = [
-			'base_url' => $baseUrl,
-			'uri_segment' => $uriSegment,
-			'per_page' => $this->perPage,
-			'total_rows' => $totalRows,
-			'use_page_numbers' => true,
+			'base_url'			=> $baseUrl,
+			'uri_segment'		=> $uriSegment,
+			'per_page'			=> $this->perPage,
+			'total_rows'		=> $totalRows,
+			'use_page_numbers'	=> true,
 			
-			'full_tag_open' => '<ul class = "pagination">',
-			'full_tag_close' => '</ul>',
-			'attribute' => ['class' =>'page-link' ],
-			'firs_link' => false,
-			'last_link'=> false,
-			'first_tag_open' => '<li class= "page-item">',
-			'first_tag_close' => '</li>',
-			'prev_link' => '&laquo',
-			'prev_tag_open' => 'li class="page-item">',
-			'prev_tag_close' => '</li>',
-			'next_link' => '&raquo',
-			'next_tag_open' => 'li class="page-item">',
-			'next_tag_close' => '</li>',
-			'last_tag_open' => 'li class="page-item">',
-			'last_tag_close' => '</li>',
-			'cur_tag_open' =>'li class="page-item active" ><a href ="#" class="page-link"> ',
-			'cur_tag_close' => '<span class="sr-only">(curent)</span></a></li>',
-			'num_tag_open' => '<li class="page-item"',
-			'num_tag_close' => '</li>',
+			'full_tag_open'		=> '<ul class="pagination">',
+			'full_tag_close'	=> '</ul>',
+			'attributes'		=> ['class' => 'page-link'],
+			'first_link'		=> false,
+			'last_link'			=> false,
+			'first_tag_open'	=> '<li class="page-item">',
+			'first_tag_close'	=> '</li>',
+			'prev_link'			=> '&laquo',
+			'prev_tag_open'		=> '<li class="page-item">',
+			'prev_tag_close'	=> '</li>',
+			'next_link'			=> '&raquo',
+			'next_tag_open'		=> '<li class="page-item">',
+			'next_tag_close'	=> '</li>',
+			'last_tag_open'		=> '<li class="page-item">',
+			'last_tag_close'	=> '</li>',
+			'cur_tag_open'		=> '<li class="page-item active"><a href="#" class="page-link">',
+			'cur_tag_close'		=> '<span class="sr-only">(current)</span></a></li>',
+			'num_tag_open'		=> '<li class="page-item">',
+			'num_tag_close'		=> '</li>',
 		];
 		$this->pagination->initialize($config);
 		return $this->pagination->create_links();
