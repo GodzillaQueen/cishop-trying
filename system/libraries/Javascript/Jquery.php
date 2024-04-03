@@ -1074,4 +1074,11 @@ class CI_Jquery extends CI_Javascript {
 		return $speed;
 	}
 
+	function createSlug()
+{
+    let title = $('#title').val();
+    $('#slug').val(string_to_slug(title));
+}
+
+
 }

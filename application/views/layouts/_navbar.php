@@ -33,7 +33,7 @@
         </li>
 				<?php else : ?>
         <li class="class nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?=$this->session->user_data('name')?></a>
+            <a href="#" class="nav-link dropdown-toggle" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?=$this->session->userdata('name')?></a>
             <div class="dropdown-menu" aria-labelledby="dropdown-2">
                 <a href="/profile.html" class="dropdown-item">Profil</a>
                 <a href="/orders.html" class="dropdown-item">Orders</a>

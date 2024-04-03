@@ -45,6 +45,22 @@ public function __construct()
 		}
 		redirect(base_url('category'));
 	}
+	public function unique_slug()
+ {
+  $slug  = $this->input->post('slug');
+  $id   = $this->input->post('id');
+  $category = $this->category->where('slug', $slug)->first();
+
+  if ($category) {
+   if ($id = $category->id) {
+    return true;
+   }
+   $this->form_validation->set_message('unique_slug', '%s sudah digunakan!');
+   return false;
+  }
+
+  return true;
+ }
 }
 
 /* End of file Category.php */
