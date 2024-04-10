@@ -7,19 +7,19 @@
 			  <span>Kategori</span>
 			  <a href="<?=base_url('category/create') ?>" class="btn btn-sm btn-secondary">Tambah</a>
 			  <div class="float-right">
-				<form action="#">
+				<?= form_open(base_url('category/search'),['method' => 'POST'])?>
 					<div class="input-group">
-						<input type="text" class="form-control form-control-sm text-center" placeholder="Cari">
+						<input type="text "name="keyword" class="form-control form-control-sm text-center" placeholder="Cari" value="<?=$this->session->userdata('keyword')?>">
 						<div class="input-group-append">
 							<button class="btn-secondary btn-sm">
 								<i class="fas fa-search " type="submit" ></i>
 							</button>
-							<a href="#" class="btn btn-secondary btn-sm">
+							<a href="<?= base_url('category/reset')?>" class="btn btn-secondary btn-sm">
 								<i class="fas fa-eraser"></i>
 							</a>
 						</div>
 					</div>
-				</form>
+				<?= form_close()?>
 			  </div>
 			</div>
 			<div class="card-body">
@@ -40,14 +40,15 @@
 								<td><?=$row->title ?></td>
 								<td><?= $row->slug ?></td>
 								<td>
-										<a href="#">
-											<button class="btn btn-sm">
+									<?= form_open("category/delete/$row->id", ['method'=> 'POST']) ?>
+									<?= form_hidden('id', $row->id)?>
+										<a href="<?=base_url("category/edit/$row->id") ?>"class="btn btn-sm">											
 												<i class="fas fa-edit text-info"></i>
-											</button>
 										</a>
-										<button class="btn btn-sm"type="submit" onclick="return confirm('Apakah kamu yakin?')">
+										<button class="btn btn-sm"type="submit" onclick="return confirm('Apakah kamu yakin ingin menghapus?')">
 											<i class="fas fa-trash text-danger"></i>
 										</button>
+									<?= form_close() ?>
 									</form>
 								</td>
 							</tr>
