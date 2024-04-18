@@ -21,7 +21,7 @@
 	}
 	function getCart()
 	{
-		$CI= &getInstance();
+		$CI =& get_instance();
 		$userId = $CI->session->userdata('id');
 
 		if ($userId) {

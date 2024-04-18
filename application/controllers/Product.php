@@ -79,7 +79,7 @@ class Product extends MY_Controller
 		}
 		if (!empty($_FILES) && $_FILES['image']['name'] !== ('')){
 			$imageName	= url_title($input->title, '-',true). '-'. date('YmdHis');
-			$upload		= $this->product->uploadImages('image', $imageName);
+			$upload		= $this->product->uploadImage('image', $imageName);
 			if ($upload) {
 				$input->image	=$upload['file_name'];
 			} else{

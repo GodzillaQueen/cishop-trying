@@ -99,7 +99,7 @@ class User extends MY_Controller {
 			$data['input']	= $data['content'];
 		} else {
 			$data['input'] = (object) $this->input->post(null, true);
-			if ($data['input']->password) {
+			if ($data['input']->password !== '') {
 				$data['input']->password 	=	hashEncrypt($data['input']->password);
 			} else {
 				$data['input']->password 	=	$data['content']->password;
@@ -112,13 +112,13 @@ class User extends MY_Controller {
 				if ($data['content']-> image !== '') {
 					$this->user->deleteImage($data['content']->image);
 				}
-				$data['input']->image	=$uplsoad['file_name'];
+				$data['input']->image	=$upload['file_name'];
 			} else{
 				redirect (base_url("user/edit/$id"));
 			}
 	}
 	if(!$this->user->validate()){
-		$data['title']			= 'Ubah Pengguna';
+		$data['title']			= 'Ubah Data Pengguna';
 		$data['form_action']	= base_url("user/edit/$id");
 		$data['page']			= 'pages/user/form';
 
